@@ -1,0 +1,5 @@
+/bin/
+/reports/
+/vendor/
+
+.phpunit.result.cache
