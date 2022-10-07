@@ -228,3 +228,7 @@ catch (\Exception $e) {
 
 echo "Created assets array = {$item->assets}".PHP_EOL;
 ```
+
+### Credits
+
+This library has been forked from https://github.com/Cheppers/gathercontent-client and re-released under a new name and ownership of Gathercontent.
