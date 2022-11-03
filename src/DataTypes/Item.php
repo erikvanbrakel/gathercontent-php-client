@@ -158,7 +158,7 @@ class Item extends Base
     {
         $elements = [];
 
-        foreach ($elementData as $element) {
+        foreach ($elementData as $key => $element) {
             if (empty($element)) {
                 continue;
             }
@@ -170,8 +170,13 @@ class Item extends Base
                 $class = ElementSimpleText::class;
                 $element = ['value' => $element];
             }
+            if (is_array($element) && isset($element[0]['file_id'])) {
+              // This is an asset element that allows several files.
+              $elements[$key] = $this->getSubElements($element);
+              continue;
+            }
             /** @var \GatherContent\DataTypes\ElementBase[] $elements */
-            $elements[] = new $class($element);
+            $elements[$key] = new $class($element);
         }
 
         return $elements;

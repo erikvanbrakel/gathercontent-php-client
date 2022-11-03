@@ -2,6 +2,8 @@
 
 namespace GatherContent\DataTypes;
 
+use GatherContent\DataTypes\Group;
+
 class ElementComponent extends Element
 {
   /**
@@ -20,10 +22,10 @@ class ElementComponent extends Element
           'closure' => function (array $data) {
             $elements = [];
             foreach ($data as $elementData) {
-              $class = static::$type2Class[$elementData['field_type']];
+              $class = Group::$type2Class[$elementData['field_type']];
               /** @var \GatherContent\DataTypes\Base $element */
               $element = new $class($elementData);
-              $elements[] = $element;
+              $elements[$element->id] = $element;
             }
             },
         ],
@@ -40,18 +42,11 @@ class ElementComponent extends Element
    *   Array of fields.
    */
   public function getChildrenFields() {
-    $type2Class = [
-      'text' => ElementText::class,
-      'attachment' => Element::class,
-      'guidelines' => ElementGuideline::class,
-      'choice_checkbox' => ElementCheckbox::class,
-      'choice_radio' => ElementRadio::class,
-    ];
     foreach ($this->data['component']['fields'] as $elementData) {
-      $class = $type2Class[$elementData['field_type']];
+      $class = Group::$type2Class[$elementData['field_type']];
       /** @var \GatherContent\DataTypes\Base $element */
       $element = new $class($elementData);
-      $elements[] = $element;
+      $elements[$element->id] = $element;
     }
     return $elements;
   }
