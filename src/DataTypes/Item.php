@@ -170,7 +170,7 @@ class Item extends Base
                 $class = ElementSimpleText::class;
                 $element = ['value' => $element];
             }
-            if (is_array($element) && isset($element[0]['file_id'])) {
+            if (is_array($element) && (isset($element[0]['file_id'])) || isset($element[0]['id'])) {
               // This is an asset element that allows several files.
               $elements[$key] = $this->getSubElements($element);
               continue;
