@@ -4,12 +4,13 @@ namespace GatherContent\DataTypes;
 
 class Group extends Base
 {
-    protected static $type2Class = [
+    public static $type2Class = [
         'text' => ElementText::class,
         'attachment' => Element::class,
         'guidelines' => ElementGuideline::class,
         'choice_checkbox' => ElementCheckbox::class,
         'choice_radio' => ElementRadio::class,
+        'component' => ElementComponent::class,
     ];
 
     /**
@@ -43,7 +44,7 @@ class Group extends Base
                             $class = static::$type2Class[$elementData['field_type']];
                             /** @var \GatherContent\DataTypes\Base $element */
                             $element = new $class($elementData);
-                            $elements[] = $element;
+                            $elements[$element->id] = $element;
                         }
 
                         return $elements;
