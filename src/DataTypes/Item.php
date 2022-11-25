@@ -171,10 +171,10 @@ class Item extends Base
                 $element = ['value' => $element];
             }
             if (is_array($element) && (isset($element[0]))) {
-              // This is an asset element that allows several files,
-              // or a mutlichoice element.
-              $elements[$key] = $this->getSubElements($element);
-              continue;
+                // This is an asset element that allows several files,
+                // or a mutlichoice element.
+                $elements[$key] = $this->getSubElements($element);
+                continue;
             }
             /** @var \GatherContent\DataTypes\ElementBase[] $elements */
             $elements[$key] = new $class($element);

@@ -1,0 +1,32 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '7.4', '8.0', '8.1' ]
+
+    name: PHP ${{ matrix.php }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: cs2pr, phpcs
+
+      - uses: php-actions/composer@v6
+
+      - name: Run phpcs
+        run: phpcs -q --report=checkstyle src | cs2pr
+
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@master
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: phpunit.xml.
+          php-version: ${{ matrix.php }}
