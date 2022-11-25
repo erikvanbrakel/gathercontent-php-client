@@ -44,7 +44,7 @@ class ElementComponent extends Element
     public function getChildrenFields()
     {
         foreach ($this->data['component']['fields'] as $elementData) {
-            $class = Group::$type2Class[$elementData['field_type']];
+          $class = Group::$type2Class[$elementData['field_type']];
             /** @var \GatherContent\DataTypes\Base $element */
             $element = new $class($elementData);
             $elements[$element->id] = $element;
