@@ -17,16 +17,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: cs2pr, phpcs
+          tools: cs2pr
 
       - uses: php-actions/composer@v6
 
       - name: Run phpcs
-        run: phpcs -q --report=checkstyle src | cs2pr
+        run: ./bin/phpcs -q --report=checkstyle src | cs2pr
 
       - name: PHPUnit Tests
-        uses: php-actions/phpunit@master
-        with:
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml.
-          php_version: ${{ matrix.php }}
+        run: ./bin/phpunit
