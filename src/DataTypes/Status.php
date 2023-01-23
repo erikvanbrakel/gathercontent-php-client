@@ -47,6 +47,7 @@ class Status extends Base
                 'position' => 'position',
                 'color' => 'color',
                 'name' => 'name',
+                'display_name' => 'display_name',
                 'description' => 'description',
                 'can_edit' => 'canEdit',
             ]
