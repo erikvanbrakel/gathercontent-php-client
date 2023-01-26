@@ -146,6 +146,7 @@ class GcBaseTestCase extends TestCase
             'position' => static::getUniqueString('position'),
             'color' => static::getUniqueString('color'),
             'name' => static::getUniqueString('name'),
+            'display_name' => static::getUniqueString('display_name'),
             'description' => static::getUniqueString('description'),
             'can_edit' => true,
         ];
