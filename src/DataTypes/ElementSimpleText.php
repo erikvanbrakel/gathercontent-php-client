@@ -53,6 +53,7 @@ class ElementSimpleText extends ElementBase
     /**
      * Need this custom serializer so we can receive back the same json what the API sends.
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

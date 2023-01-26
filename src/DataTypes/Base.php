@@ -7,7 +7,7 @@ use JsonSerializable;
 use ReflectionObject;
 use ReflectionProperty;
 
-class Base implements JsonSerializable, \Serializable
+class Base implements JsonSerializable
 {
     /**
      * @var string
@@ -69,6 +69,7 @@ class Base implements JsonSerializable, \Serializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $export = [];
@@ -217,7 +218,7 @@ class Base implements JsonSerializable, \Serializable
     /**
     * Serialize only public non-static properties.
     */
-    public function serialize()
+    public function __serialize()
     {
         $toSerialize = [];
         $reflection = new ReflectionObject($this);
@@ -230,15 +231,15 @@ class Base implements JsonSerializable, \Serializable
             $toSerialize[$name] = $this->{$name};
         }
 
-        return serialize($toSerialize);
+        return $toSerialize;
     }
 
     /**
     * {@inheritdoc}
     */
-    public function unserialize($serialized)
+    public function __unserialize(array $data)
     {
-        foreach (unserialize($serialized) as $propertyName => $propertyValue) {
+        foreach ($data as $propertyName => $propertyValue) {
             $this->{$propertyName} = $propertyValue;
         }
     }
