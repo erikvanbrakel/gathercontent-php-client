@@ -86,7 +86,7 @@ class BaseTest extends GcBaseTestCase
     {
         return [
             'basic' => [
-                serialize(['id' => 'foo']),
+                ['id' => 'foo'],
                 [
                     'id' => 'foo',
                 ],
@@ -100,7 +100,7 @@ class BaseTest extends GcBaseTestCase
     public function testSerialize($expected, array $data)
     {
         $base = new Base($data);
-        static::assertEquals($expected, $base->serialize());
+        static::assertEquals($expected, $base->__serialize());
     }
 
     public function casesUnserialize()
@@ -110,7 +110,7 @@ class BaseTest extends GcBaseTestCase
                 [
                     'id' => 'foo',
                 ],
-                serialize(['id' => 'foo']),
+                ['id' => 'foo'],
             ],
         ];
     }
@@ -118,12 +118,12 @@ class BaseTest extends GcBaseTestCase
     /**
      * @dataProvider casesUnserialize
      */
-    public function testUnserialize(array $expected, $data)
+    public function testUnserialize(array $expected, array $data)
     {
         $baseExpected = new Base($expected);
 
         $base = new Base();
-        $base->unserialize($data);
+        $base->__unserialize($data);
 
         static::assertEquals($baseExpected->id, $base->id);
     }
