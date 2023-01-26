@@ -27,6 +27,11 @@ class Status extends Base
     /**
      * @var string
      */
+    public $display_name = '';
+
+    /**
+     * @var string
+     */
     public $description = '';
 
     /**
